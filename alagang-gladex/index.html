@@ -1,0 +1,1122 @@
+<title>Alagang Gladex</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f4f6fa;--surface:#ffffff;--surface-2:#eef2f7;--ink:#15213a;--muted:#4f5d77;--line:#dbe1ea;
+  --brand:#f7931e;--brand-text:#a85300;--brand-soft:#fff1de;--on-brand:#15213a;--sun:#fdb833;
+  --grad:linear-gradient(100deg,#f7931e 0%,#fdb833 100%);
+  --sky:#1ea7e1;--sky-text:#0a6c99;--sky-soft:#e6f5fc;--logo-bg:#ffffff;
+  --navy:#15213a;--navy-2:#1f2f52;--on-navy:#ffffff;--on-navy-muted:#c3cce0;
+  --focus:#0a6c99;--ok:#1d7a4a;--ok-soft:#e3f4ea;--warn-ink:#7a4a00;--warn-soft:#fff3d6;
+  --star:#d97300;--star-off:#c9d1de;--scrim:rgba(10,16,30,.5);--shadow:0 6px 24px rgba(21,33,58,.10);
+  --bubble-alex:#eef2f7;--bubble-me:#15213a;--on-bubble-me:#ffffff;--panel:rgba(255,255,255,.62);--panel-line:rgba(255,255,255,.75);
+  --font:"Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  color-scheme:light;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:16px;line-height:1.55;overflow-x:hidden}
+body.chat-open{overflow:hidden}
+h1,h2,h3,p{margin:0}
+a{color:var(--sky-text)}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:6px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.wrap{max-width:1408px;margin:0 auto;padding:0 16px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:10px 30px;border-radius:12px;border:2px solid transparent;font-weight:700;font-size:15px;text-decoration:none;cursor:pointer;letter-spacing:.01em;white-space:nowrap}
+.btn-primary{background:var(--brand);background-image:var(--grad);color:var(--on-brand)}
+.btn-primary:hover{filter:brightness(1.06)}
+.btn-ghost{background:transparent;border-color:var(--line);color:var(--ink)}
+.btn-ghost:hover{border-color:var(--brand)}
+.btn-navy{background:var(--navy);color:var(--on-navy)}
+.tag{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;padding:3px 9px;border-radius:999px;background:var(--warn-soft);color:var(--warn-ink);letter-spacing:.02em}
+.tag::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+/* header */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--surface);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:12px;min-height:60px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);min-width:0;margin-right:auto}
+.brand svg,.brand img{flex:none}
+.brand img{width:44px;height:44px;object-fit:contain;border-radius:10px;background:var(--logo-bg);border:1px solid var(--line)}
+/* page background: official Gladex logo as a fixed watermark */
+.bg-logo{position:fixed;inset:-12px;filter:blur(1px);z-index:0;pointer-events:none;background:url("assets/gladex-bg.jpg") center bottom/cover no-repeat}
+main,footer{position:relative;z-index:1}
+
+.foot-logo{width:72px;height:72px;object-fit:contain;display:block;margin-bottom:10px;border-radius:14px;background:var(--logo-bg);border:1px solid var(--line)}
+.brand b{font-weight:800;letter-spacing:.06em;font-size:15px;display:block;line-height:1.1}
+.brand small{display:block;color:var(--muted);font-size:12px;line-height:1.2}
+.icon-btn{width:42px;height:42px;border-radius:10px;border:1px solid var(--line);background:var(--surface);display:grid;place-items:center;cursor:pointer;flex:none}
+.icon-btn svg{width:20px;height:20px;stroke:var(--ink);fill:none;stroke-width:2}
+.top .btn{min-height:42px;padding:8px 14px;font-size:14px}
+/* hero */
+.hero{background:transparent;color:var(--ink);position:relative;overflow:hidden}
+.hero .wrap{position:relative;z-index:1;padding:28px 20px 30px;margin:20px max(16px,calc((100% - 1376px)/2)) 44px;background:var(--panel);border:1px solid var(--panel-line);border-radius:12px}
+@media (min-width:760px){.hero .wrap{padding:52px 44px 54px;min-height:34vh;display:flex;flex-direction:column;justify-content:center}.hero h1{margin:6px 0 10px}.hero-cta{margin-top:16px}.hero-note{margin-top:14px}}
+.art-path{fill:none;stroke:var(--sun);stroke-width:2.5;stroke-dasharray:2 10;stroke-linecap:round}
+.art-plane{fill:var(--sun)}
+.eyebrow{display:inline-block;font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand-text)}
+.hero h1{font-size:clamp(46px,11.5vw,132px);font-weight:800;letter-spacing:.02em;line-height:1;margin:10px 0 14px}
+@media (min-width:760px){.hero h1{font-size:min(132px,calc((100vw - 130px)/9.8));white-space:nowrap}}
+.hero h1 span{color:var(--brand-text)}
+.hero .tagline{font-size:clamp(20px,4.6vw,28px);font-weight:700;line-height:1.25;max-width:none}
+.hero .sub{margin-top:10px;color:var(--ink);font-size:17px;max-width:62ch}
+.hero-cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.hero-cta .btn{min-width:190px}
+@media (max-width:520px){.hero-cta .btn{flex:1 1 100%}}
+.hero-cta .btn-ghost{color:var(--ink);border-color:var(--ink);background:var(--panel)}
+.hero-cta .btn-ghost:hover{border-color:var(--brand)}
+.hero-note{margin-top:20px;font-size:14px;color:var(--ink);border-left:3px solid var(--sky);padding-left:12px;max-width:none}
+.hero-note a{color:var(--ink);font-weight:800}
+/* sections */
+section{padding:40px 0}
+.sec-head{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:12px;margin-bottom:20px}
+.sec-head h2{font-size:clamp(24px,5.4vw,32px);font-weight:800;line-height:1.15}
+.sec-head p{color:var(--muted);max-width:52ch;margin-top:6px}
+.sec-head>div{min-width:0}
+#reviews .sec-head,.trip-sec .sec-head{background:var(--panel);border:1px solid var(--panel-line);border-radius:16px;padding:14px 16px}
+/* actions */
+.actions{margin-top:-22px;padding-top:0;position:relative;z-index:2}
+.grid4{display:grid;grid-template-columns:1fr;gap:12px}
+@media (min-width:560px){.grid4{grid-template-columns:1fr 1fr}.grid4 .act:last-child{grid-column:1/-1}}
+@media (min-width:980px){.grid4{grid-template-columns:repeat(6,1fr)}.grid4 .act{grid-column:span 2}.grid4 .act.main,.grid4 .act.book{grid-column:span 3}.grid4 .act:last-child{grid-column:span 2}}
+.act.book{border:2px solid var(--sky)}
+.act.book .em{background:var(--sky-soft)}
+.act.book:hover{border-color:var(--sky-text)}
+/* trip inquiry */
+.trip-sec{background:transparent}
+.trip-sec .chip{border-color:var(--sky)}
+.ex{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.ex .chip{min-height:36px;padding:6px 12px}
+.radios{display:flex;flex-wrap:wrap;gap:8px}
+.radios label{display:flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:10px;padding:8px 12px;background:var(--bg);font-weight:600;font-size:14px;cursor:pointer}
+.radios input{accent-color:var(--brand);width:18px;height:18px}
+.act{display:flex;gap:14px;align-items:flex-start;text-align:left;width:100%;padding:18px;border-radius:16px;border:1px solid var(--line);background:var(--surface);box-shadow:var(--shadow);cursor:pointer;text-decoration:none;color:var(--ink);transition:transform .15s,border-color .15s}
+.act:hover{transform:translateY(-2px);border-color:var(--brand)}
+.act .em{flex:none;width:48px;height:48px;border-radius:12px;background:var(--brand-soft);display:grid;place-items:center;font-size:24px;line-height:1}
+.act .txt{min-width:0;flex:1}
+.act h3{font-size:16px;font-weight:800;letter-spacing:.03em;line-height:1.25}
+.act p{font-size:14px;color:var(--muted);margin-top:4px}
+.act .tag{margin-top:8px}
+.act.main{background:var(--brand);background-image:var(--grad);border-color:var(--brand);color:var(--on-brand)}
+.act.main .em{background:var(--surface)}
+.act.main p{color:var(--on-brand)}
+.act.main .tag{background:var(--navy);color:var(--on-navy)}
+/* hotline */
+.hotline{display:grid;gap:18px;padding:22px;border-radius:20px;background:var(--surface);border:2px solid var(--brand)}
+@media (min-width:760px){.hotline{grid-template-columns:1fr auto;align-items:center;padding:28px 32px}}
+.hotline h2{font-size:22px;font-weight:800;line-height:1.2}
+.hotline .lead{color:var(--muted);margin-top:6px}
+.hl-box{min-width:0}
+.hl-label{font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--brand-text)}
+.hl-num{display:block;font-size:clamp(28px,8.4vw,40px);font-weight:800;letter-spacing:.02em;line-height:1.15;user-select:all;-webkit-user-select:all;color:var(--ink);overflow-wrap:anywhere}
+.hl-btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+.hl-status{font-size:13px;color:var(--ok);min-height:1.3em;margin-top:6px}
+.hl-ph{font-size:13px;color:var(--muted);margin-top:4px}
+/* care flow */
+.care .wrap,.faq-sec .wrap{background:var(--panel);border:1px solid var(--panel-line);border-radius:20px;padding:24px 20px;margin:0 max(16px,calc((100% - 1376px)/2))}
+.flow{list-style:none;margin:0;padding:0;display:grid;gap:0;counter-reset:s}
+.flow li{position:relative;display:flex;gap:14px;align-items:flex-start;padding:0 0 18px;min-width:0}
+.flow li::before{counter-increment:s;content:counter(s);flex:none;width:34px;height:34px;border-radius:50%;background:var(--navy);color:var(--on-navy);display:grid;place-items:center;font-weight:800;font-size:14px;position:relative;z-index:1}
+.flow li::after{content:"";position:absolute;left:16px;top:34px;bottom:0;width:2px;background:var(--line)}
+.flow li:last-child::after{display:none}
+.flow li:last-child::before{background:var(--brand);color:var(--on-brand)}
+.flow b{display:block;font-size:15px;padding-top:5px}
+.flow span{display:block;font-size:13px;color:var(--muted)}
+.flow .t{min-width:0}
+@media (min-width:860px){
+  .flow{grid-template-columns:repeat(5,1fr);gap:12px}
+  .flow li{flex-direction:column;padding:0}
+  .flow li::after{left:34px;right:-12px;top:16px;bottom:auto;width:auto;height:2px}
+  .flow b{padding-top:0}
+}
+.roles{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:22px}
+@media (min-width:860px){.roles{grid-template-columns:repeat(4,1fr)}}
+.role{padding:12px 14px;border-radius:12px;background:var(--surface-2);min-width:0}
+.role b{display:block;font-size:14px}
+.role span{font-size:13px;color:var(--muted)}
+/* reviews */
+.rev-grid{display:grid;gap:12px}
+@media (min-width:640px){.rev-grid{grid-template-columns:1fr 1fr}}
+@media (min-width:980px){.rev-grid{grid-template-columns:repeat(3,1fr)}}
+.rev{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.rev.new{border:2px solid var(--brand)}
+.rev-top{display:flex;gap:12px;align-items:center}
+.av{flex:none;width:40px;height:40px;border-radius:50%;background:var(--navy);color:var(--on-navy);display:grid;place-items:center;font-weight:800;font-size:15px}
+.rev-who{min-width:0}
+.rev-who b{display:block;font-size:15px}
+.rev-who span{font-size:13px;color:var(--muted)}
+.stars-row{color:var(--star);font-size:17px;letter-spacing:2px}
+.stars-row .off{color:var(--star-off)}
+.rev p{font-size:15px;overflow-wrap:anywhere}
+.rev .lbl{font-size:12px;font-weight:700;color:var(--muted);border-top:1px dashed var(--line);padding-top:8px;margin-top:auto}
+.rev .lbl.pend{color:var(--warn-ink)}
+/* google reviews */
+.g-wrap{margin-top:22px;background:var(--panel);border:1px solid var(--panel-line);border-radius:18px;padding:18px}
+.g-head{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;margin-bottom:14px}
+.g-head h3{font-size:20px;display:flex;align-items:center;gap:10px}
+.g-logo{font-weight:800;letter-spacing:-.01em}
+.g-logo .b{color:#1a62d6}.g-logo .r{color:#c5221f}.g-logo .y{color:#a86b00}.g-logo .g{color:#137333}
+.g-head p{font-size:14px;color:var(--muted)}
+.g-branches{display:grid;gap:10px;margin-bottom:14px}
+@media (min-width:640px){.g-branches{grid-template-columns:1fr 1fr}}
+@media (min-width:1100px){.g-branches{grid-template-columns:repeat(4,1fr)}}
+.g-br{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.g-br b{font-size:15px}
+.g-score{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.g-score .num{font-size:26px;font-weight:800}
+.g-score .cnt{font-size:13px;color:var(--muted)}
+.g-br .acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto}
+.g-br .acts .btn{min-height:40px;padding:8px 14px;font-size:13px;flex:1}
+.g-br .todo{font-size:12px;font-weight:700;color:var(--warn-ink);background:var(--warn-soft);border-radius:8px;padding:4px 8px;align-self:flex-start}
+.g-ask{margin-top:12px;padding:14px;border-radius:12px;background:var(--sky-soft);display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+.g-ask p{font-size:14px;color:var(--ink)}
+.g-ask .btn{min-height:40px;padding:8px 18px;font-size:14px}
+/* review form */
+.rf-wrap{margin-top:20px;background:var(--panel);border:1px solid var(--panel-line);border-radius:18px;padding:20px}
+.rf{display:grid;gap:14px}
+@media (min-width:700px){.rf{grid-template-columns:1fr 1fr}.rf .full{grid-column:1/-1}}
+.fld{display:flex;flex-direction:column;gap:6px;min-width:0}
+.fld label,.fld legend{font-weight:700;font-size:14px}
+.fld .hint{font-size:13px;color:var(--muted)}
+.in{width:100%;min-height:46px;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--bg);font-size:16px}
+textarea.in{min-height:110px;resize:vertical}
+.in:focus-visible{border-color:var(--focus)}
+.two{display:flex;gap:8px}
+.two .in{flex:1;min-width:0}
+fieldset{border:0;margin:0;padding:0;min-width:0}
+.stars{display:flex;gap:4px;margin-top:4px}
+.stars input{position:absolute;opacity:0;width:1px;height:1px}
+.stars label{cursor:pointer;padding:2px;border-radius:8px}
+.stars svg{width:36px;height:36px;display:block}
+.stars path{fill:var(--star-off)}
+.stars label.on path{fill:var(--star)}
+.stars input:focus-visible+label{outline:3px solid var(--focus);outline-offset:1px}
+.chk{display:flex;gap:10px;align-items:flex-start;font-size:14px}
+.chk input{width:20px;height:20px;margin-top:2px;flex:none;accent-color:var(--brand)}
+.form-err{color:var(--warn-ink);background:var(--warn-soft);border-radius:10px;padding:10px 12px;font-size:14px}
+.form-ok{color:var(--ok);background:var(--ok-soft);border-radius:10px;padding:10px 12px;font-size:14px}
+.rf-actions{display:flex;flex-wrap:wrap;gap:10px}
+/* footer */
+footer{background:var(--panel);padding:28px 0 110px;color:var(--muted);font-size:13px;border-top:1px solid var(--line)}
+footer p+p{margin-top:6px}
+footer .copy{margin-top:16px;padding-top:12px;border-top:1px solid var(--line);font-weight:600;color:var(--ink)}
+/* launcher */
+.fab{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:30;display:flex;align-items:center;gap:10px;padding:10px 16px 10px 10px;border-radius:999px;border:0;background:var(--navy);color:var(--on-navy);font-weight:800;box-shadow:var(--shadow);cursor:pointer}
+.av-logo{flex:none;display:block;border-radius:50%;background:var(--logo-bg);overflow:hidden;box-shadow:0 0 0 2px var(--brand)}
+.av-logo img{width:100%;height:100%;object-fit:contain;display:block}
+.fab .av-logo{width:38px;height:38px}
+body.chat-open .fab{display:none}
+/* chat panel */
+.scrim{position:fixed;inset:0;background:var(--scrim);z-index:40}
+.chat{position:fixed;z-index:50;left:0;right:0;bottom:0;height:min(90dvh,760px);background:var(--surface);color:var(--ink);border-radius:20px 20px 0 0;display:grid;grid-template-rows:auto auto 1fr auto auto;box-shadow:var(--shadow);transform:translateY(100%);transition:transform .25s ease;padding-bottom:env(safe-area-inset-bottom,0px)}
+.chat.open{transform:none}
+@media (min-width:768px){.chat{left:auto;top:0;height:auto;width:420px;border-radius:0;transform:translateX(100%)}}
+.ch-head{display:flex;align-items:center;gap:12px;padding:14px 16px;border-bottom:1px solid var(--line)}
+.ch-head .av-logo{width:46px;height:46px}
+.ch-head .who{min-width:0;flex:1}
+.ch-head h2{font-size:17px;font-weight:800;line-height:1.2}
+.ch-head p{font-size:12px;color:var(--muted);line-height:1.3}
+.ch-head .tag{margin-top:4px}
+.ch-menu{font-size:13px;font-weight:700;background:none;border:1px solid var(--line);border-radius:8px;padding:6px 10px;cursor:pointer;flex:none}
+.ch-hot{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;padding:8px 16px;background:var(--surface-2);font-size:13px}
+.ch-hot b{font-weight:800}
+.ch-hot button{background:none;border:0;padding:4px 0;color:var(--brand-text);font-weight:700;cursor:pointer;text-decoration:underline}
+.log{overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px;overscroll-behavior:contain;min-height:0}
+.msg{max-width:86%;padding:10px 14px;border-radius:16px;font-size:15px;overflow-wrap:anywhere;animation:pop .2s ease}
+.msg.alex{background:var(--bubble-alex);border-bottom-left-radius:4px;align-self:flex-start}
+.msg.me{background:var(--bubble-me);color:var(--on-bubble-me);border-bottom-right-radius:4px;align-self:flex-end}
+.msg.note{align-self:stretch;max-width:none;background:var(--warn-soft);color:var(--warn-ink);font-size:13px;border-radius:10px}
+.typing{display:flex;gap:4px;align-items:center;min-height:40px}
+.typing i{width:7px;height:7px;border-radius:50%;background:var(--muted);animation:blink 1s infinite}
+.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
+@keyframes blink{50%{opacity:.25}}
+@keyframes pop{from{opacity:0;transform:translateY(4px)}}
+.card-in{align-self:stretch;border:1px solid var(--line);border-radius:14px;padding:14px;background:var(--surface);animation:pop .2s ease}
+.card-in .hl-num{font-size:28px}
+.sum h3{font-size:16px;font-weight:800;color:var(--ok)}
+.sum .ref{font-weight:800;font-size:15px;margin-top:2px}
+.sum dl{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;margin:10px 0;font-size:14px}
+.sum dt{color:var(--muted)}
+.sum dd{margin:0;min-width:0;overflow-wrap:anywhere}
+.sum p{font-size:14px}
+.sum p+p{margin-top:6px}
+.qr{display:flex;flex-wrap:wrap;gap:8px;padding:0 16px 10px;max-height:38vh;overflow-y:auto}
+.qr:empty{display:none}
+.chip{border:1.5px solid var(--brand);background:var(--surface);color:var(--ink);border-radius:999px;padding:8px 14px;font-size:14px;font-weight:600;cursor:pointer;text-align:left;min-height:40px}
+.chip:hover{background:var(--brand-soft)}
+.chip.strong{background:var(--brand);color:var(--on-brand);font-weight:800;letter-spacing:.02em}
+.ch-form{display:flex;gap:8px;padding:10px 16px 14px;border-top:1px solid var(--line);align-items:flex-end}
+.ch-form .fld{flex:1}
+.ch-form label{font-size:12px;color:var(--muted);font-weight:600}
+.ch-form .in{min-height:44px}
+.ch-form .btn{min-height:44px;padding:8px 14px}
+.ch-err{font-size:12px;color:var(--warn-ink);min-height:0}
+/* faqs */
+.faq-sec .wrap{border-top:4px solid var(--brand)}
+.faq-tools{display:grid;gap:12px;margin-bottom:6px}
+.faq-search{position:relative}
+.faq-search svg{position:absolute;left:13px;top:50%;transform:translateY(-50%);width:20px;height:20px;stroke:var(--muted);fill:none;stroke-width:2;pointer-events:none}
+.faq-search .in{padding-left:42px;background:var(--surface)}
+.faq-count{font-size:13px;color:var(--muted)}
+.faq-cat{margin-top:10px;background:var(--surface);border:1px solid var(--line);border-radius:12px}
+.faq-cat[open]{border-color:var(--brand)}
+.faq-cat>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:12px;padding:14px 16px;min-height:54px}
+.faq-cat>summary::-webkit-details-marker{display:none}
+.faq-cat>summary h3{flex:1;min-width:0;font-size:17px;font-weight:800;margin:0;line-height:1.3}
+.faq-cat>summary .n{flex:none;font-size:13px;font-weight:700;color:var(--muted)}
+.faq-cat>summary::after{content:"▾";flex:none;width:30px;height:30px;border-radius:50%;background:var(--brand);background-image:var(--grad);color:var(--on-brand);display:grid;place-items:center;font-size:16px;line-height:1;transition:transform .2s}
+.faq-cat[open]>summary::after{transform:rotate(180deg)}
+.faq-cat>.faq-list{padding:0 12px 12px}
+.faq-list{display:grid;gap:8px}
+@media (min-width:900px){.faq-list{grid-template-columns:1fr 1fr;align-items:start}}
+.faq{background:var(--surface);border:1px solid var(--line);border-radius:14px;min-width:0}
+.faq[open]{border-color:var(--brand)}
+.faq summary{list-style:none;cursor:pointer;display:flex;gap:12px;align-items:flex-start;justify-content:space-between;padding:13px 16px;font-weight:700;font-size:15px;line-height:1.4;min-height:48px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";flex:none;width:26px;height:26px;border-radius:50%;background:var(--brand-soft);color:var(--brand-text);display:grid;place-items:center;font-weight:800;font-size:18px;line-height:1}
+.faq[open] summary::after{content:"\2212"}
+.faq-a{padding:0 16px 14px;font-size:15px;overflow-wrap:anywhere}
+.faq-a ul{margin:0;padding-left:20px}
+.faq-a .ph{color:var(--warn-ink);background:var(--warn-soft);border-radius:4px;padding:0 4px;font-size:14px}
+.faq-foot{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;margin-top:12px;padding-top:8px;border-top:1px dashed var(--line)}
+.faq-ask{background:none;border:0;padding:6px 0;color:var(--sky-text);font-weight:700;font-size:14px;cursor:pointer;text-decoration:underline;min-height:36px}
+.faq-empty{background:var(--surface);border:1px dashed var(--line);border-radius:14px;padding:18px;margin-top:16px}
+.faq-empty p+p{margin-top:6px}
+.faq-cta{margin-top:24px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;padding:18px 20px;border-radius:16px;background:var(--navy);color:var(--on-navy)}
+.faq-cta p{font-weight:700;max-width:44ch}
+.faq-note{margin-top:10px;font-size:13px;color:var(--muted)}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="star" viewBox="0 0 24 24"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></symbol>
+</svg>
+
+<div class="bg-logo" aria-hidden="true"></div>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Alagang Gladex home">
+      <img src="assets/gladex-logo.png" alt="Gladex Travel and Tours Corp." width="44" height="44">
+      <span><b>ALAGANG GLADEX</b><small>Gladex Travel and Tours</small></span>
+    </a>
+    <button class="btn btn-primary" type="button" data-open-chat>Chat with ALEX</button>
+  </div>
+</header>
+
+<main id="top">
+  <div class="hero">
+    <div class="wrap">
+      <span class="eyebrow">After-Travel Customer Care</span>
+      <h1>ALAGANG <span>GLADEX</span></h1>
+      <p class="tagline">Your Travel May Be Over, But Our Care Continues.</p>
+      <p class="sub">Planning your next trip or have a concern after your last one? We're here for you. No need to wonder "Saan ako magme-message?" &mdash; start here.</p>
+      <div class="hero-cta">
+        <button class="btn btn-primary" type="button" data-open-chat>Chat with ALEX</button>
+        <a class="btn btn-ghost" href="#hotline">Call our hotline</a>
+        <a class="btn btn-ghost" href="#faqs">Read FAQs</a>
+      </div>
+      <p class="hero-note">Need immediate assistance? Call our Gladex Hotline: <a href="tel:+639171460222">0917-146-0222</a></p>
+    </div>
+  </div>
+
+  <section class="actions" aria-labelledby="act-h">
+    <div class="wrap">
+      <h2 id="act-h" class="sr">How can we help?</h2>
+      <div class="grid4">
+        <button class="act main" type="button" data-open-chat>
+          <span class="em" aria-hidden="true">💬</span>
+          <span class="txt"><h3>CHAT WITH ALEX</h3><p>Get assistance anytime through our Gladex Customer Assistant.</p><span class="tag">Demo &mdash; not connected yet</span></span>
+        </button>
+        <button class="act book" type="button" data-open-trip>
+          <span class="em" aria-hidden="true">🌴</span>
+          <span class="txt"><h3>BOOK YOUR NEXT TRIP</h3><p>Ready for your next adventure? Let us plan it for you.</p></span>
+        </button>
+        <a class="act" href="#hotline">
+          <span class="em" aria-hidden="true">📞</span>
+          <span class="txt"><h3>CALL OUR HOTLINE</h3><p>For concerns that require immediate assistance.</p></span>
+        </a>
+        <a class="act" href="#reviews">
+          <span class="em" aria-hidden="true">⭐</span>
+          <span class="txt"><h3>SEE CLIENT REVIEWS</h3><p>See what our clients say about their Gladex experience.</p></span>
+        </a>
+        <button class="act" type="button" data-open-review>
+          <span class="em" aria-hidden="true">✍️</span>
+          <span class="txt"><h3>WRITE A REVIEW</h3><p>Share your experience with Gladex.</p></span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <section id="hotline" aria-labelledby="hl-h">
+    <div class="wrap">
+      <div class="hotline" data-hotline>
+        <div style="min-width:0">
+          <h2 id="hl-h">Need immediate assistance? Call our Gladex Hotline.</h2>
+          <p class="lead">Prefer talking to a person? Hindi mo kailangang dumaan sa chat &mdash; call us directly.</p>
+          <p class="hl-ph">Our team is ready to assist you with your travel concerns.</p>
+        </div>
+        <div class="hl-box">
+          <span class="hl-label">Gladex Hotline</span>
+          <span class="hl-num" id="hl-main">0917-146-0222</span>
+          <div class="hl-btns">
+            <a class="btn btn-primary" href="tel:+639171460222">CALL GLADEX</a>
+            <button class="btn btn-ghost" type="button" data-copy>Copy number</button>
+          </div>
+          <p class="hl-status" role="status" aria-live="polite"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="trip-sec" id="plan" aria-labelledby="tp-h">
+    <div class="wrap">
+      <div class="sec-head"><div><h2 id="tp-h">Plan your next trip with Gladex</h2><p>Saan ang next adventure mo? Tell us what you have in mind and a Gladex travel consultant will send you options.</p></div></div>
+      <div class="rf-wrap" style="margin-top:0">
+        <form class="rf" id="tf" novalidate aria-labelledby="tp-h">
+          <div class="fld full">
+            <label for="tp-dest">Destination of interest</label>
+            <input class="in" id="tp-dest" maxlength="80" placeholder="Where would you like to go?" aria-describedby="tp-ex-h">
+            <span class="hint" id="tp-ex-h">Example destinations &mdash; to be replaced by Gladex</span>
+            <div class="ex" id="tp-ex"></div>
+          </div>
+          <div class="fld">
+            <label for="tp-month">Preferred travel month</label>
+            <div class="two">
+              <select class="in" id="tp-month"><option value="">Month</option></select>
+              <label for="tp-year" class="sr">Preferred travel year</label>
+              <select class="in" id="tp-year"><option value="">Year</option></select>
+            </div>
+          </div>
+          <div class="fld"><label for="tp-pax">Number of travelers</label><input class="in" id="tp-pax" type="number" inputmode="numeric" min="1" max="99" placeholder="e.g., 4"></div>
+          <div class="fld full"><label for="tp-budget">Budget range (optional)</label><input class="in" id="tp-budget" maxlength="60" placeholder="Your budget, per person or total"></div>
+          <fieldset class="fld">
+            <legend>Preferred contact</legend>
+            <div class="radios">
+              <label for="tp-c-msgr"><input type="radio" name="tp-pref" id="tp-c-msgr" value="Messenger">Messenger</label>
+              <label for="tp-c-sms"><input type="radio" name="tp-pref" id="tp-c-sms" value="SMS">SMS</label>
+              <label for="tp-c-call"><input type="radio" name="tp-pref" id="tp-c-call" value="Phone call">Call</label>
+            </div>
+          </fieldset>
+          <div class="fld"><label for="tp-num">Contact number</label><input class="in" id="tp-num" type="tel" inputmode="tel" autocomplete="tel" placeholder="09XX XXX XXXX"></div>
+          <label class="chk full" for="tp-consent"><input type="checkbox" id="tp-consent"><span>I agree that Gladex may contact me about this travel inquiry.</span></label>
+          <div class="full" id="tp-msg" role="status" aria-live="polite"></div>
+          <div class="rf-actions full">
+            <button class="btn btn-primary" type="submit">Send my trip inquiry</button>
+            <button class="btn btn-ghost" type="button" data-open-chat="book">Or plan it with ALEX</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section class="care" aria-labelledby="care-h">
+    <div class="wrap">
+      <div class="sec-head"><div><h2 id="care-h">How we take care of you</h2><p>Tapos na ang trip mo, pero tuloy pa rin ang alaga. Here's what happens when you reach out.</p></div></div>
+      <ol class="flow">
+        <li><div class="t"><b>Chat with ALEX</b><span>Your first point of contact, any time.</span></div></li>
+        <li><div class="t"><b>ALEX understands your concern</b><span>A few quick questions, no long forms.</span></div></li>
+        <li><div class="t"><b>Connected to the right Gladex team</b><span>A real person picks it up.</span></div></li>
+        <li><div class="t"><b>Concern documented</b><span>You get a reference number.</span></div></li>
+        <li><div class="t"><b>Resolution and follow-up</b><span>We follow through until it's settled.</span></div></li>
+      </ol>
+      <div class="roles">
+        <div class="role"><b>ALEX</b><span>First point of contact</span></div>
+        <div class="role"><b>CRA / Customer Service</b><span>Human assistance</span></div>
+        <div class="role"><b>Quality Assurance</b><span>Quality monitoring</span></div>
+        <div class="role"><b>Management</b><span>Escalation</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="reviews" aria-labelledby="rv-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><h2 id="rv-h">⭐ What Our Clients Say</h2><p>Stories from travelers after their Gladex trip, here and on Google. The cards below are placeholders for this prototype.</p></div>
+        <button class="btn btn-primary" type="button" id="rv-toggle" aria-expanded="false" aria-controls="rf-wrap">WRITE A REVIEW</button>
+      </div>
+      <div class="rev-grid" id="rev-list"></div>
+
+      <div class="g-wrap" id="g-reviews" aria-labelledby="g-h">
+        <div class="g-head">
+          <div><h3 id="g-h"><span class="g-logo" aria-hidden="true"><span class="b">G</span><span class="r">o</span><span class="y">o</span><span class="b">g</span><span class="g">l</span><span class="r">e</span></span><span class="sr">Google</span> Reviews</h3>
+          <p>Ratings from our Gladex branches on Google. Loved your trip? Leave us a review on Google too.</p></div>
+        </div>
+        <div class="g-branches" id="g-branches"></div>
+        <div class="rev-grid" id="g-list"></div>
+        <p id="g-note" style="font-size:13px;color:var(--muted);margin-top:10px"></p>
+      </div>
+
+      <div class="rf-wrap" id="rf-wrap" hidden>
+        <div class="sec-head" style="margin-bottom:14px"><div><h2 id="rf-h" style="font-size:22px">Write a review</h2><p>Share your experience with Gladex. Reviews are checked by our team before they appear.</p></div></div>
+        <form class="rf" id="rf" novalidate aria-labelledby="rf-h">
+          <fieldset class="fld full">
+            <legend>Your rating</legend>
+            <div class="stars" id="rv-stars">
+              <input type="radio" name="rv-rating" id="rv-star-1" value="1"><label for="rv-star-1"><span class="sr">1 star</span><svg aria-hidden="true"><use href="#star"/></svg></label>
+              <input type="radio" name="rv-rating" id="rv-star-2" value="2"><label for="rv-star-2"><span class="sr">2 stars</span><svg aria-hidden="true"><use href="#star"/></svg></label>
+              <input type="radio" name="rv-rating" id="rv-star-3" value="3"><label for="rv-star-3"><span class="sr">3 stars</span><svg aria-hidden="true"><use href="#star"/></svg></label>
+              <input type="radio" name="rv-rating" id="rv-star-4" value="4"><label for="rv-star-4"><span class="sr">4 stars</span><svg aria-hidden="true"><use href="#star"/></svg></label>
+              <input type="radio" name="rv-rating" id="rv-star-5" value="5"><label for="rv-star-5"><span class="sr">5 stars</span><svg aria-hidden="true"><use href="#star"/></svg></label>
+            </div>
+          </fieldset>
+          <div class="fld"><label for="rv-name">Name</label><span class="hint" id="rv-name-h">First name and last initial is fine (e.g., Ana R.)</span><input class="in" id="rv-name" name="rv-name" autocomplete="name" aria-describedby="rv-name-h" maxlength="40"></div>
+          <div class="fld"><label for="rv-trip">Trip / destination</label><input class="in" id="rv-trip" name="rv-trip" placeholder="e.g., Bohol family trip" maxlength="60"></div>
+          <div class="fld full">
+            <label for="rv-month">Travel month</label>
+            <div class="two">
+              <select class="in" id="rv-month" name="rv-month"><option value="">Month</option></select>
+              <label for="rv-year" class="sr">Travel year</label>
+              <select class="in" id="rv-year" name="rv-year"><option value="">Year</option></select>
+            </div>
+          </div>
+          <div class="fld full"><label for="rv-text">Your review</label><textarea class="in" id="rv-text" name="rv-text" maxlength="600" placeholder="Kumusta ang trip mo? Tell us what went well and what we can improve."></textarea></div>
+          <label class="chk full" for="rv-consent"><input type="checkbox" id="rv-consent" name="rv-consent"><span>I agree that Gladex may display my review, name and trip publicly on this page.</span></label>
+          <div class="full" id="rv-msg" role="status" aria-live="polite"></div>
+          <div class="rf-actions full">
+            <button class="btn btn-primary" type="submit">Submit review</button>
+            <button class="btn btn-ghost" type="button" id="rv-cancel">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq-sec" id="faqs" aria-labelledby="faq-h">
+    <div class="wrap">
+      <div class="sec-head"><div><h2 id="faq-h">Frequently Asked Questions (FAQs)</h2><p><em>Find quick answers to your travel and aftersales concerns.</em></p></div></div>
+      <div class="faq-tools">
+        <div class="faq-search">
+          <label for="faq-q" class="sr">Search FAQs</label>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
+          <input class="in" id="faq-q" type="search" maxlength="80" placeholder="Search a question, e.g., refund, lost voucher, hotel" autocomplete="off" aria-controls="faq-list" aria-describedby="faq-count">
+        </div>
+        <p class="faq-count" id="faq-count" role="status" aria-live="polite"></p>
+      </div>
+      <div id="faq-list"></div>
+      <div class="faq-empty" id="faq-empty" hidden>
+        <p><b>No FAQs match your search.</b></p>
+        <p>Try a shorter word, or ask ALEX directly.</p>
+        <div class="rf-actions" style="margin-top:12px"><button class="btn btn-primary" type="button" id="faq-empty-alex">Chat with ALEX</button><button class="btn btn-ghost" type="button" id="faq-clear">Clear search</button></div>
+      </div>
+      <div class="faq-cta">
+        <p>Didn't find the answer you're looking for? Chat with ALEX for assistance.</p>
+        <button class="btn btn-primary" type="button" id="faq-cta-alex">Chat with ALEX</button>
+      </div>
+      <p class="faq-note" id="faq-note"></p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <img class="foot-logo" src="assets/gladex-logo.png" alt="Gladex Travel and Tours Corp.">
+    <p><b>Alagang Gladex</b> &middot; Gladex Travel and Tours Corp.</p>
+    <p>Prototype for internal review only. ALEX is a scripted demo and is not connected to any Gladex system. Nothing you type here is sent or saved.</p>
+    <p class="copy">&copy; 2026 Gladex Travel and Tours Corp. All rights reserved.</p>
+  </div>
+</footer>
+
+<button class="fab" type="button" data-open-chat aria-label="Chat with ALEX"><span class="av-logo" aria-hidden="true"><img src="assets/gladex-logo.png" alt=""></span>Chat with ALEX</button>
+
+<div class="scrim" id="scrim" hidden></div>
+<div class="chat" id="chat" role="dialog" aria-modal="true" aria-labelledby="ch-title" hidden>
+  <div class="ch-head">
+    <span class="av-logo" aria-hidden="true"><img src="assets/gladex-logo.png" alt=""></span>
+    <div class="who"><h2 id="ch-title">ALEX</h2><p>Alagang Gladex Experience &middot; Customer Assistant</p><span class="tag">Demo &mdash; not connected yet</span></div>
+    <button class="ch-menu" type="button" id="ch-menu">Menu</button>
+    <button class="icon-btn" type="button" id="ch-close" aria-label="Close chat"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  </div>
+  <div class="ch-hot" data-hotline>
+    <span>Prefer to call? <b class="hl-num" style="font-size:14px;display:inline">0917-146-0222</b></span>
+    <button type="button" data-copy>Copy number</button>
+    <a href="tel:+639171460222" style="font-weight:700">CALL GLADEX</a>
+    <span class="hl-status sr" role="status" aria-live="polite"></span>
+  </div>
+  <div class="log" id="log" role="log" aria-live="polite" aria-label="Conversation with ALEX"></div>
+  <div class="qr" id="qr" role="group" aria-label="Quick replies"></div>
+  <form class="ch-form" id="ch-form" novalidate>
+    <div class="fld"><label for="ch-input" id="ch-label">Type a message</label><input class="in" id="ch-input" autocomplete="off" maxlength="300" aria-describedby="ch-err"><span class="ch-err" id="ch-err"></span></div>
+    <button class="btn btn-primary" type="submit">Send</button>
+  </form>
+</div>
+
+<template id="tpl-hot">
+  <div class="card-in" data-hotline>
+    <span class="hl-label">Gladex Hotline</span>
+    <span class="hl-num">0917-146-0222</span>
+    <div class="hl-btns"><a class="btn btn-primary" href="tel:+639171460222">CALL GLADEX</a><button class="btn btn-ghost" type="button" data-copy>Copy number</button></div>
+    <p class="hl-status" role="status" aria-live="polite"></p>
+  </div>
+</template>
+
+<script>
+(function(){
+var HOT='0917-146-0222';
+var $=function(s,r){return (r||document).querySelector(s)};
+var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+
+/* copy hotline */
+document.addEventListener('click',function(e){
+  var b=e.target.closest('[data-copy]'); if(!b) return;
+  var box=b.closest('[data-hotline]'), num=$('.hl-num',box), st=$('.hl-status',box);
+  function sel(){
+    try{var r=document.createRange();r.selectNodeContents(num);var s=getSelection();s.removeAllRanges();s.addRange(r);}catch(x){}
+    if(st) st.textContent='Number selected. Use your device\'s Copy to save it.';
+  }
+  function ok(){ if(st) st.textContent='Copied: '+HOT; var t=b.textContent; b.textContent='Copied'; setTimeout(function(){b.textContent=t==='Copied'?'Copy number':t},2000); }
+  try{
+    if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(HOT).then(ok).catch(sel); }
+    else sel();
+  }catch(x){ sel(); }
+});
+
+/* reviews */
+var MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
+var SAMPLES=[
+  {name:'Maria S.',trip:'Bohol family trip',month:'May 2026',rating:5,text:'Smooth trip from start to finish. When we had a question after coming home, Gladex still answered us right away. Salamat po!'},
+  {name:'Joel R.',trip:'Japan tour',month:'April 2026',rating:5,text:'Our flight schedule changed while we were abroad. The team helped us understand our options and kept us updated.'},
+  {name:'Liza T.',trip:'Boracay barkada trip',month:'March 2026',rating:4,text:'Good hotel and easy transfers. Had a small concern about our room and it was noted and followed up after the trip.'},
+  {name:'Paolo D.',trip:'Singapore getaway',month:'February 2026',rating:5,text:'I liked that I knew exactly who to message after the trip. Hindi na ako nag-alala kung saan magfo-follow up.'},
+  {name:'Grace M.',trip:'Palawan honeymoon',month:'January 2026',rating:4,text:'Friendly and patient staff. They explained everything clearly before and after our travel.'}
+];
+var list=$('#rev-list');
+function starsHtml(n){var s='';for(var i=1;i<=5;i++)s+=i<=n?'★':'<span class="off">★</span>';return s}
+function revCard(r,pending){
+  var a=document.createElement('article'); a.className='rev'+(pending?' new':'');
+  var ini=(r.name.trim().charAt(0)||'?').toUpperCase();
+  a.innerHTML='<div class="rev-top"><span class="av" aria-hidden="true"></span><div class="rev-who"><b></b><span></span></div></div>'+
+    '<div class="stars-row" role="img" aria-label="'+r.rating+' out of 5 stars">'+starsHtml(r.rating)+'</div><p></p>'+
+    '<span class="lbl'+(pending?' pend':'')+'">'+(pending?'Pending approval (demo)':'Sample review &mdash; placeholder')+'</span>';
+  $('.av',a).textContent=ini; $('.rev-who b',a).textContent=r.name;
+  $('.rev-who span',a).textContent=r.trip+(r.month?' · '+r.month:''); $('p',a).textContent=r.text;
+  return a;
+}
+SAMPLES.forEach(function(r){list.appendChild(revCard(r))});
+
+var mSel=$('#rv-month'), ySel=$('#rv-year');
+MONTHS.forEach(function(m){var o=document.createElement('option');o.value=o.textContent=m;mSel.appendChild(o)});
+var yr=new Date().getFullYear(); for(var y=yr;y>=yr-3;y--){var o=document.createElement('option');o.value=o.textContent=String(y);ySel.appendChild(o)}
+
+var rfWrap=$('#rf-wrap'), rf=$('#rf'), tog=$('#rv-toggle'), msg=$('#rv-msg');
+function openReview(){
+  rfWrap.hidden=false; tog.setAttribute('aria-expanded','true');
+  rfWrap.scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'});
+  setTimeout(function(){$('#rv-star-1').focus({preventScroll:true})},reduce?0:350);
+}
+function closeReview(){rfWrap.hidden=true;tog.setAttribute('aria-expanded','false');tog.focus()}
+tog.addEventListener('click',function(){rfWrap.hidden?openReview():closeReview()});
+$('#rv-cancel').addEventListener('click',closeReview);
+$$('[data-open-review]').forEach(function(b){b.addEventListener('click',openReview)});
+function paintStars(){
+  var c=rf.querySelector('input[name="rv-rating"]:checked'), v=c?+c.value:0;
+  $$('#rv-stars label').forEach(function(l,i){l.classList.toggle('on',i<v)});
+}
+$$('#rv-stars input').forEach(function(i){i.addEventListener('change',paintStars)});
+rf.addEventListener('submit',function(e){
+  e.preventDefault();
+  var c=rf.querySelector('input[name="rv-rating"]:checked');
+  var name=$('#rv-name').value.trim(), trip=$('#rv-trip').value.trim(), text=$('#rv-text').value.trim();
+  var errs=[], first=null;
+  function bad(m,el){errs.push(m);if(!first)first=el}
+  if(!c) bad('choose a star rating',$('#rv-star-1'));
+  if(name.length<2) bad('add your name',$('#rv-name'));
+  if(trip.length<2) bad('add your trip or destination',$('#rv-trip'));
+  if(!mSel.value||!ySel.value) bad('pick your travel month and year',mSel.value?ySel:mSel);
+  if(text.length<10) bad('write a few words about your experience',$('#rv-text'));
+  if(!$('#rv-consent').checked) bad('tick the consent box',$('#rv-consent'));
+  if(errs.length){msg.className='form-err';msg.textContent='Almost there! Please '+errs.join(', ')+'.';first.focus();return}
+  var card=revCard({name:name,trip:trip,month:mSel.value+' '+ySel.value,rating:+c.value,text:text},true);
+  list.insertBefore(card,list.firstChild);
+  rf.reset(); paintStars();
+  msg.className='form-ok';
+  msg.textContent='Salamat po! Your review was added at the top as "Pending approval (demo)". In the live version, Gladex reviews it before it is shown. Nothing was saved in this prototype.';
+  gAsk();
+  setTimeout(function(){card.scrollIntoView({behavior:reduce?'auto':'smooth',block:'center'})},reduce?0:900);
+});
+
+/* google reviews: palitan ang laman ng GOOGLE kapag may official links na */
+var GOOGLE={
+  /* reviewUrl = "Ask for reviews" link ng branch sa Google Business Profile (hal. https://g.page/r/XXXX/review)
+     mapsUrl   = Google Maps link ng branch. Iwanang '' hangga't wala pa. */
+  branches:[
+    {name:'Gladex Main',rating:null,count:null,reviewUrl:'',mapsUrl:''},
+    {name:'Gladex Corporate',rating:null,count:null,reviewUrl:'',mapsUrl:''},
+    {name:'Gladex Robinsons',rating:null,count:null,reviewUrl:'',mapsUrl:''},
+    {name:'Gladex SM',rating:null,count:null,reviewUrl:'',mapsUrl:''}
+  ],
+  /* Google reviews na ipapakita sa page (pinili ng QA; walang personal na detalye) */
+  reviews:[
+    {name:'Sample G.',branch:'Gladex Main',when:'2 weeks ago',rating:5,text:'Sample Google review placeholder. Replace with a real review from the Gladex Google Business Profile.'},
+    {name:'Sample R.',branch:'Gladex SM',when:'1 month ago',rating:5,text:'Sample Google review placeholder. Real reviews will show here once the Google links are connected.'},
+    {name:'Sample L.',branch:'Gladex Robinsons',when:'1 month ago',rating:4,text:'Sample Google review placeholder for layout only.'}
+  ]
+};
+var gReady=GOOGLE.branches.some(function(b){return b.reviewUrl});
+function gOpen(b,kind){
+  var u=kind==='write'?b.reviewUrl:(b.mapsUrl||b.reviewUrl);
+  if(u){window.open(u,'_blank','noopener');return}
+  alert('Prototype: the Google link for '+b.name+' is not connected yet. Once Gladex adds it, this opens '+(kind==='write'?'the Google "write a review" page':'the branch reviews on Google Maps')+'.');
+}
+var gBr=$('#g-branches');
+GOOGLE.branches.forEach(function(b){
+  var d=document.createElement('div'); d.className='g-br';
+  var has=b.rating!=null;
+  d.innerHTML='<b></b><div class="g-score">'+(has?'<span class="num">'+b.rating.toFixed(1)+'</span><span class="stars-row" role="img" aria-label="'+b.rating.toFixed(1)+' out of 5 stars">'+starsHtml(Math.round(b.rating))+'</span><span class="cnt">'+(b.count||0)+' Google reviews</span>':'<span class="cnt">Rating appears once connected</span>')+'</div>'+
+    (b.reviewUrl?'':'<span class="todo">Google link needed</span>')+
+    '<div class="acts"><button class="btn btn-primary" type="button" data-k="write">Review us on Google</button><button class="btn btn-ghost" type="button" data-k="read">See on Google</button></div>';
+  $('b',d).textContent=b.name;
+  $$('button',d).forEach(function(x){x.addEventListener('click',function(){gOpen(b,x.getAttribute('data-k'))})});
+  gBr.appendChild(d);
+});
+var gList=$('#g-list');
+GOOGLE.reviews.forEach(function(r){
+  var a=revCard({name:r.name,trip:r.branch,month:r.when,rating:r.rating,text:r.text});
+  $('.lbl',a).textContent=gReady?'Posted on Google':'Sample Google review — placeholder';
+  gList.appendChild(a);
+});
+$('#g-note').textContent=gReady?'Reviews shown are from Google. Tap "See on Google" to read all.':'Prototype: Google links and ratings are placeholders until Gladex adds the official Google Business Profile link of each branch.';
+/* pagkatapos mag-submit: alok sa LAHAT ng rating (bawal sa Google ang pili-piliin lang ang masaya) */
+function gAsk(){
+  var old=$('#g-ask'); if(old) old.remove();
+  var box=document.createElement('div'); box.className='g-ask full'; box.id='g-ask';
+  box.innerHTML='<p><b>Gusto mo rin bang i-share sa Google?</b> Piliin ang branch na nag-asikaso sa trip mo.</p><div class="rf-actions"></div>';
+  var acts=$('.rf-actions',box);
+  GOOGLE.branches.forEach(function(b){
+    var x=document.createElement('button'); x.type='button'; x.className='btn btn-ghost'; x.textContent=b.name.replace('Gladex ','');
+    x.addEventListener('click',function(){gOpen(b,'write')}); acts.appendChild(x);
+  });
+  msg.insertAdjacentElement('afterend',box);
+}
+
+/* trip inquiry */
+var EXD=['Boracay','Bohol','Palawan','Japan','South Korea','Singapore'];
+var tf=$('#tf'), tmsg=$('#tp-msg'), tMon=$('#tp-month'), tYr=$('#tp-year');
+MONTHS.forEach(function(m){var o=document.createElement('option');o.value=o.textContent=m;tMon.appendChild(o)});
+for(var y2=yr;y2<=yr+2;y2++){var o2=document.createElement('option');o2.value=o2.textContent=String(y2);tYr.appendChild(o2)}
+EXD.forEach(function(d){var b=document.createElement('button');b.type='button';b.className='chip';b.textContent=d;b.addEventListener('click',function(){$('#tp-dest').value=d;$('#tp-dest').focus()});$('#tp-ex').appendChild(b)});
+function validNum(v){var d=v.replace(/\D/g,'');return /^[+\d\s()-]+$/.test(v)&&d.length>=10&&d.length<=13}
+function openTrip(){$('#plan').scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'});setTimeout(function(){$('#tp-dest').focus({preventScroll:true})},reduce?0:350)}
+$$('[data-open-trip]').forEach(function(b){b.addEventListener('click',openTrip)});
+tf.addEventListener('submit',function(e){
+  e.preventDefault();
+  var dest=$('#tp-dest').value.trim(), pax=+$('#tp-pax').value, pref=tf.querySelector('input[name="tp-pref"]:checked'), num=$('#tp-num').value.trim();
+  var errs=[], first=null;
+  function bad(m,el){errs.push(m);if(!first)first=el}
+  if(dest.length<2) bad('add a destination',$('#tp-dest'));
+  if(!tMon.value||!tYr.value) bad('pick your preferred month and year',tMon.value?tYr:tMon);
+  if(!(pax>=1&&pax<=99)) bad('add the number of travelers',$('#tp-pax'));
+  if(!pref) bad('choose how we should contact you',$('#tp-c-msgr'));
+  if(!validNum(num)) bad('enter a valid mobile number',$('#tp-num'));
+  if(!$('#tp-consent').checked) bad('tick the consent box',$('#tp-consent'));
+  if(errs.length){tmsg.className='form-err';tmsg.textContent='Almost there! Please '+errs.join(', ')+'.';first.focus();return}
+  tmsg.className='form-ok';
+  tmsg.textContent='Inquiry recorded — Reference '+refNo()+' (demo). A Gladex travel consultant will send you options for '+dest+' via '+pref.value+'. Our team will get back to you as soon as possible. Demo only: nothing was sent or saved.';
+  tf.reset(); tmsg.setAttribute('tabindex','-1'); tmsg.focus();
+});
+
+/* ===== ALEX (scripted demo) ===== */
+var chat=$('#chat'), scrim=$('#scrim'), log=$('#log'), qr=$('#qr'), form=$('#ch-form'), inp=$('#ch-input'), lab=$('#ch-label'), err=$('#ch-err');
+var started=false, lastFocus=null, token=0, pending=null, st={};
+
+function openChat(flow,run){
+  lastFocus=document.activeElement;
+  chat.hidden=false; scrim.hidden=false; document.body.classList.add('chat-open');
+  requestAnimationFrame(function(){requestAnimationFrame(function(){chat.classList.add('open')})});
+  if(run){started=true;token++;pending=null;clearQR();resetInput();run()}
+  else if(flow==='book'){started=true;token++;pending=null;clearQR();then(say("Hi! I'm ALEX, your Alagang Gladex Assistant."),book)}
+  else if(!started){started=true;menu(true)}
+  setTimeout(function(){$('#ch-close').focus()},60);
+}
+function closeChat(){
+  chat.classList.remove('open'); document.body.classList.remove('chat-open'); scrim.hidden=true;
+  setTimeout(function(){chat.hidden=true},reduce?0:260);
+  if(lastFocus&&lastFocus.focus) lastFocus.focus();
+}
+$$('[data-open-chat]').forEach(function(b){b.addEventListener('click',function(){openChat(b.getAttribute('data-open-chat'))})});
+$('#ch-close').addEventListener('click',closeChat);
+scrim.addEventListener('click',closeChat);
+$('#ch-menu').addEventListener('click',function(){menu(false)});
+chat.addEventListener('keydown',function(e){
+  if(e.key==='Escape'){closeChat();return}
+  if(e.key!=='Tab') return;
+  var f=$$('button,a[href],input,select,textarea',chat).filter(function(x){return !x.disabled&&x.offsetParent!==null});
+  if(!f.length) return;
+  var a=f[0], z=f[f.length-1];
+  if(e.shiftKey&&document.activeElement===a){e.preventDefault();z.focus()}
+  else if(!e.shiftKey&&document.activeElement===z){e.preventDefault();a.focus()}
+});
+
+function scroll(){log.scrollTop=log.scrollHeight}
+function wait(ms){return new Promise(function(r){setTimeout(r,reduce?0:ms)})}
+function add(cls,text){var d=document.createElement('div');d.className='msg '+cls;d.textContent=text;log.appendChild(d);scroll();return d}
+function say(){
+  var items=Array.prototype.slice.call(arguments), t=token;
+  return items.reduce(function(p,it){
+    return p.then(function(go){
+      if(!go||t!==token) return false;
+      var ty=document.createElement('div');ty.className='msg alex typing';ty.setAttribute('aria-hidden','true');ty.innerHTML='<i></i><i></i><i></i>';
+      log.appendChild(ty);scroll();
+      return wait(420).then(function(){
+        ty.remove(); if(t!==token) return false;
+        if(typeof it==='string') add('alex',it); else {log.appendChild(it);scroll()}
+        return true;
+      });
+    });
+  },Promise.resolve(true));
+}
+function clearQR(){qr.innerHTML=''}
+function chips(arr){
+  clearQR();
+  arr.forEach(function(c){
+    var b=document.createElement('button');b.type='button';b.className='chip'+(c.strong?' strong':'');b.textContent=c.label;
+    b.addEventListener('click',function(){clearQR();pending=null;resetInput();add('me',c.echo||c.label);c.fn()});
+    qr.appendChild(b);
+  });
+}
+function resetInput(){lab.textContent='Type a message';inp.placeholder='';err.textContent=''}
+function ask(label,ph,check,fn){
+  pending={check:check,fn:fn}; lab.textContent=label; inp.placeholder=ph||''; err.textContent='';
+  setTimeout(function(){inp.focus({preventScroll:true})},30);
+}
+form.addEventListener('submit',function(e){
+  e.preventDefault();
+  var v=inp.value.trim(); if(!v){err.textContent='Please type your answer first.';return}
+  if(pending){
+    var r=pending.check(v); if(r!==true){err.textContent=r;return}
+    var p=pending; pending=null; inp.value=''; resetInput(); clearQR(); add('me',v); p.fn(v); return;
+  }
+  inp.value=''; err.textContent=''; clearQR(); add('me',v); suggestFaqs(v);
+});
+function then(p,fn){p.then(function(go){if(go)fn()})}
+
+var C={
+  trip:{label:'✈️ I have a concern about my recent trip',topic:'Recent trip concern',intro:"I'm sorry something didn't go right on your trip. Let me get a few details so the right Gladex team can help you."},
+  booking:{label:'🧳 I need help with my booking',topic:'Booking assistance',intro:'Sure, I can help with your booking. A few quick details first.'},
+  payment:{label:'💳 I have a payment/refund concern',topic:'Payment/refund concern',intro:"I understand. Payment and refund concerns are reviewed by our team according to Gladex policy, so I can't confirm any refund, credit or voucher here. I'll record your concern so the right team can review it.",catQ:'Which best describes your concern?',cats:['Payment not reflected','Refund status','Double charge','Other payment concern']},
+  hotel:{label:'🏨 I have a hotel concern',topic:'Hotel concern',intro:"Sorry to hear about your hotel experience. Let me take down the details.",catQ:'What was it about?',cats:['Room or amenities','Check-in or check-out','Hotel staff or service','Other hotel concern']},
+  flight:{label:'✈️ I have a flight concern',topic:'Flight concern',intro:"Let's look into your flight concern. A few quick questions.",catQ:'What happened with your flight?',cats:['Schedule change or delay','Cancelled flight','Baggage','Other flight concern']}
+};
+
+function menu(first){
+  token++; pending=null; clearQR(); resetInput();
+  var p=first?say("Hi! I'm ALEX, your Alagang Gladex Assistant. How can I help you today?")
+             :say('What else can I help you with?');
+  then(p,function(){
+    var arr=['trip','booking','payment','hotel','flight'].map(function(k){return {label:C[k].label,fn:function(){concern(k)}}});
+    arr.splice(0,0,{label:'🌴 I want to book my next trip',fn:book});
+    arr.push({label:'❓ I have a question (FAQs)',fn:faqHelp});
+    arr.push({label:'📝 I want to submit a review',fn:review});
+    arr.push({label:'👩‍💼 I want to talk to a Gladex representative',fn:rep});
+    arr.push({label:'📞 I need urgent assistance',fn:urgent});
+    chips(arr);
+  });
+}
+
+function concern(k){
+  var c=C[k]; st={topic:c.topic};
+  then(say(c.intro,"First, what's your booking reference? If you don't have it, the full name used in the booking is okay."),function(){
+    ask('Booking reference or name used in booking','e.g., GDX-12345 or Juan Dela Cruz',function(v){return v.length>=2||'Please enter your booking reference or name.'},function(v){
+      st.booking=v;
+      then(say('Thank you! When and where did you travel?'),function(){
+        ask('Travel date and destination','e.g., Sept 2026, Bohol',function(v){return v.length>=3||'Please add your travel date and destination.'},function(v){
+          st.trip=v;
+          if(c.cats){
+            then(say(c.catQ),function(){chips(c.cats.map(function(x){return {label:x,fn:function(){st.cat=x;describe()}}}))});
+          } else describe();
+        });
+      });
+    });
+  });
+}
+function book(){
+  st={};
+  then(say("Exciting! Let's plan your next adventure. Where would you like to go?"),function(){
+    var go=function(v){st.dest=v;
+      then(say('Nice choice! Which month are you planning to travel?'),function(){
+        ask('Preferred travel month','e.g., December 2026',function(v){return v.length>=3||'Please add your preferred month.'},function(v){st.month=v;
+          then(say('How many travelers are joining?'),function(){
+            ask('Number of travelers','e.g., 4',function(v){var n=parseInt(v,10);return (n>=1&&n<=99)||'Please enter a number, e.g., 4.'},function(v){st.pax=v;
+              then(say('Do you have a budget range in mind? This is optional.'),function(){
+                ask('Budget range (optional)','Per person or total',function(v){return v.length>=1||'Type your budget or tap Skip.'},function(v){st.budget=v;bookContact()});
+                chips([{label:'Skip',fn:function(){st.budget='Not specified';bookContact()}}]);
+              });
+            });
+          });
+        });
+      });
+    };
+    var n=document.createElement('div');n.className='msg note';n.textContent='Example destinations — to be replaced by Gladex';log.appendChild(n);scroll();
+    chips(EXD.map(function(d){return {label:d,fn:function(){go(d)}}}));
+    ask('Destination of interest','Type a destination',function(v){return v.length>=2||'Please type a destination.'},go);
+  });
+}
+function bookContact(){
+  then(say('How would you like our travel consultant to reach you?'),function(){
+    chips(['Messenger','SMS','Phone call'].map(function(x){return {label:x,fn:function(){st.pref=x;
+      then(say('What mobile number should we use?'),function(){
+        ask('Contact number','09XX XXX XXXX',function(v){return validNum(v)||'Please enter a valid mobile number, e.g., 09XX XXX XXXX.'},function(v){st.num=v;bookSummary()});
+      });
+    }}}));
+  });
+}
+function bookSummary(){
+  var d=document.createElement('div');d.className='card-in sum';
+  d.innerHTML='<h3>Inquiry recorded</h3><div class="ref"></div><dl></dl><p>A Gladex travel consultant will send you options.</p><p>Our team will get back to you as soon as possible.</p><p class="hl-ph">Demo only: nothing was sent or saved.</p>';
+  $('.ref',d).textContent='Reference '+refNo()+' (demo)';
+  var dl=$('dl',d);
+  [['Destination',st.dest],['Travel month',st.month],['Travelers',st.pax],['Budget',st.budget],['Contact',st.pref+' · '+st.num]].forEach(function(r){var dt=document.createElement('dt');dt.textContent=r[0];var dd=document.createElement('dd');dd.textContent=r[1];dl.appendChild(dt);dl.appendChild(dd)});
+  then(say('Salamat po! Here is your trip inquiry.',d,'Want to talk to someone now? You can call our hotline.'),function(){
+    chips([{label:'Call the Gladex Hotline',fn:hotline},{label:'CONNECT ME TO AN AGENT',strong:true,fn:agent},{label:'Back to main menu',fn:function(){menu(false)}}]);
+  });
+}
+function describe(){
+  then(say('In a few words, please tell us what happened.'),function(){
+    ask('Short description of your concern','Type a short description',function(v){return v.length>=8||'A few more words please, para maintindihan ng team.'},function(v){st.desc=v;contact()});
+  });
+}
+function contact(){
+  then(say('How would you like our team to reach you?'),function(){
+    chips(['Messenger','SMS','Phone call'].map(function(x){return {label:x,fn:function(){
+      st.pref=x;
+      then(say(x==='Messenger'?'Got it. What mobile number is linked to your Messenger, so we can find you?':'Got it. What mobile number should we use?'),function(){
+        ask('Contact number','09XX XXX XXXX',function(v){return validNum(v)||'Please enter a valid mobile number, e.g., 09XX XXX XXXX.'},function(v){st.num=v;summary()});
+      });
+    }}}));
+  });
+}
+function refNo(){var s='ABCDEFGHJKLMNPQRSTUVWXYZ23456789',r='';for(var i=0;i<6;i++)r+=s.charAt(Math.floor(Math.random()*s.length));return 'ALX-'+r}
+function summary(){
+  var ref=refNo(), d=document.createElement('div'); d.className='card-in sum';
+  d.innerHTML='<h3>Concern recorded</h3><div class="ref"></div><dl></dl>'+
+    '<p>A Gladex Customer Relations Associate (CRA) will reach out to you via <b class="pref"></b>.</p>'+
+    '<p>Our team will get back to you as soon as possible.</p>'+
+    '<p class="hl-ph">Demo only: nothing was sent or saved.</p>';
+  $('.ref',d).textContent='Reference '+ref+' (demo)';
+  $('.pref',d).textContent=st.pref;
+  var rows=[['Concern',st.topic+(st.cat?' · '+st.cat:'')],['Booking',st.booking],['Trip',st.trip],['Details',st.desc],['Contact',st.pref+' · '+st.num]];
+  var dl=$('dl',d);
+  rows.forEach(function(r){var dt=document.createElement('dt');dt.textContent=r[0];var dd=document.createElement('dd');dd.textContent=r[1];dl.appendChild(dt);dl.appendChild(dd)});
+  then(say('Salamat po! Here is a summary of your concern.',d,'If you need to talk to someone sooner, you can connect to an agent or call our hotline.'),function(){
+    chips([{label:'CONNECT ME TO AN AGENT',strong:true,fn:agent},{label:'Call the Gladex Hotline',fn:hotline},{label:'Back to main menu',fn:function(){menu(false)}}]);
+  });
+}
+function hotCard(){return document.getElementById('tpl-hot').content.firstElementChild.cloneNode(true)}
+function agent(){
+  var n=document.createElement('div');n.className='msg note';
+  n.textContent='Demo: this prototype is not connected yet. In the live version, a Gladex Customer Relations Associate (CRA) joins the chat here.';
+  then(say('Connecting you to a Gladex representative…',n,'If you need help right now, you can also call our hotline.',hotCard()),function(){
+    chips([{label:'Back to main menu',fn:function(){menu(false)}}]);
+  });
+}
+function hotline(){
+  then(say('Here is our Gladex Hotline. Tap CALL GLADEX, or copy the number.',hotCard()),function(){
+    chips([{label:'CONNECT ME TO AN AGENT',strong:true,fn:agent},{label:'Back to main menu',fn:function(){menu(false)}}]);
+  });
+}
+function urgent(){
+  then(say('For urgent concerns, please call our Gladex Hotline now so a person can assist you right away.',hotCard()),function(){
+    chips([{label:'CONNECT ME TO AN AGENT',strong:true,fn:agent},{label:'Back to main menu',fn:function(){menu(false)}}]);
+  });
+}
+function rep(){
+  then(say('Of course. Would you like to speak with a Gladex representative?'),function(){
+    chips([{label:'CONNECT ME TO AN AGENT',strong:true,fn:agent},{label:'Call the hotline instead',fn:hotline},{label:'Back to main menu',fn:function(){menu(false)}}]);
+  });
+}
+function review(){
+  then(say("Thank you for sharing your experience! I'll open the review form for you."),function(){
+    setTimeout(function(){closeChat();openReview()},reduce?0:500);
+  });
+}
+function notSure(){
+  token++;
+  then(say("Sorry, I'm a simple assistant for now and I may not understand typed messages yet.",'Would you like to speak with a Gladex representative?'),function(){
+    chips([{label:'CONNECT ME TO AN AGENT',strong:true,fn:agent},{label:'Show main menu',fn:function(){menu(false)}}]);
+  });
+}
+
+/* ===== FAQs =====
+   tc:1 = answer depends on a Gladex policy that is not in the approved sources yet;
+   it is tagged "Policy to confirm" and must be approved before the page goes live. */
+var HL='<a href="tel:+639171460222">Gladex Hotline (0917-146-0222)</a>';
+function PH(t){return '<span class="ph">['+t+' &mdash; to be confirmed by Gladex]</span>'}
+var FAQ_CATS=[
+  {id:'flight',em:'✈️',name:'Flight and Airline Concerns',short:'Flights',k:'flight'},
+  {id:'hotel',em:'🏨',name:'Hotel and Accommodation',short:'Hotels',k:'hotel'},
+  {id:'tour',em:'🗺️',name:'Tour Packages and Inclusions',short:'Tours',k:'trip'},
+  {id:'docs',em:'📄',name:'Booking and Travel Documents',short:'Booking & documents',k:'booking'},
+  {id:'pay',em:'💳',name:'Payment and Refund',short:'Payment & refund',k:'payment'},
+  {id:'cancel',em:'🔁',name:'Cancellation and Rebooking',short:'Cancel & rebook',k:'booking'},
+  {id:'after',em:'🧳',name:'After-Travel Concerns',short:'After travel',k:'trip'},
+  {id:'help',em:'💬',name:'Customer Assistance and Reviews',short:'Assistance & reviews',k:'rep'}
+];
+var FAQS=[
+  {c:'flight',q:'How can I check my flight status?',a:'Check your airline’s official website or app using your booking reference or e-ticket number. Airport screens and the airline counter also show the latest status. If you can’t find your booking details, chat with ALEX and we’ll help.'},
+  {c:'flight',q:'What should I do if my flight is cancelled or rescheduled?',a:'Contact Gladex right away through ALEX or the '+HL+', and have your booking reference ready. Your options, such as rebooking or a refund, depend on the airline’s policy for your ticket. Our team will check them with the airline before confirming anything with you.'},
+  {c:'flight',q:'Can I request a flight change or name correction?',a:'Yes, flight changes and name corrections may be requested. These depend on your airline’s fare rules — some fares don’t allow them — and a Gladex service fee applies. Send your request through ALEX with your booking reference, and our team will confirm all the details and charges with you before anything is processed.'},
+  {c:'flight',q:'What should I do if I miss my flight?',a:'Go to the airline counter right away and ask about the next available flight, then contact Gladex through the '+HL+'. Whether you can be rebooked, and any charges, depend on the airline’s rules for your ticket.'},
+  {c:'flight',q:'Who should I contact if I experience a flight-related problem?',a:'At the airport, the airline counter can act on your flight immediately. For help from Gladex, chat with ALEX or, if it’s urgent, call the '+HL+'.'},
+
+  {c:'hotel',q:'What should I do if the hotel cannot find my reservation?',a:'Show the front desk your hotel voucher or Gladex booking confirmation, then call the '+HL+' right away so our team can coordinate with the hotel. Keep your booking reference ready.'},
+  {c:'hotel',q:'What if the hotel room or accommodation does not match my confirmed booking?',a:'Take photos and note what is different from your confirmed booking. Tell us while you are still at the hotel if you can, through ALEX or the hotline, so we can raise it with the hotel. Any change or adjustment depends on the hotel’s review and terms.'},
+  {c:'hotel',q:'What should I do if a hotel inclusion is missing?',a:'Check your voucher or confirmation for the listed inclusions (for example, breakfast or transfers) and ask the front desk first. Then report it to Gladex through ALEX with your booking reference and any photos or receipts.'},
+  {c:'hotel',q:'How can I confirm my hotel booking details?',a:'Your hotel name, dates, room type and inclusions are on your hotel voucher or booking confirmation from Gladex. To double-check anything, chat with ALEX or contact your Gladex travel consultant with your booking reference.'},
+  {c:'hotel',q:'Who should I contact if I experience a problem during my hotel stay?',a:'Let the hotel front desk know first so they can act on site. For help from Gladex, chat with ALEX; if it’s urgent, call the '+HL+'.'},
+
+  {c:'tour',q:'How can I check my confirmed package inclusions?',a:'Your inclusions are listed in your booking confirmation and itinerary from Gladex. If something isn’t clear, chat with ALEX or ask your Gladex travel consultant.'},
+  {c:'tour',q:'What should I do if a tour activity is unavailable?',a:'Activities can be affected by weather, local rules or supplier availability. Tell us right away through the '+HL+' or ALEX so we can check with the tour operator. We’ll arrange a suitable replacement, adjustment, or alternative option for your approval, so your experience stays smooth and enjoyable.'},
+  {c:'tour',q:'What if the actual service differs from my confirmed itinerary?',a:'Note what happened (time, place, names) and take photos if you can, then report it through ALEX with your booking reference. Our team will review it against your confirmed itinerary. We can’t promise a specific outcome until the review is done.'},
+  {c:'tour',q:'How can I report a missing inclusion?',a:'Open ALEX and choose “I have a concern about my recent trip.” Give your booking reference, travel date and destination, and a short description of what was missing. Photos or receipts help our team review it.'},
+  {c:'tour',q:'Can I request assistance after completing my tour?',a:'Yes. Alagang Gladex is our after-travel care: you can still reach us through ALEX or the hotline after your trip, for concerns, feedback or your next booking.'},
+
+  {c:'docs',q:'Where can I find my booking confirmation?',a:'Gladex sends your booking confirmation through email and Messenger. You may also view it on your Gladex Landing Page and Flight Status Landing Page. If you can’t find it, chat with ALEX and give the full name used in the booking.'},
+  {c:'docs',q:'What should I do if my travel documents contain incorrect information?',a:'Tell us as soon as you notice, ideally before you travel, through ALEX or your travel consultant. Include your booking reference and a photo of the error. Corrections on airline tickets follow the airline’s rules and may not always be possible.'},
+  {c:'docs',q:'How can I request a copy of my booking documents?',a:'Simply reach out to your Gladex travel consultant or ALEX with your booking reference or the full name used in the booking. Your agent will process your request and guide you on how to receive a copy of your booking documents.'},
+  {c:'docs',q:'What should I do if I lose my travel voucher?',a:'Ask Gladex for a replacement copy through ALEX. If you’re already at the hotel or tour and need it now, call the '+HL+'.'},
+  {c:'docs',q:'Who should I contact if I have questions about my travel documents?',a:'Your Gladex travel consultant or ALEX. For urgent document concerns close to your travel date, call the '+HL+'.'},
+
+  {c:'pay',q:'How can I confirm my payment?',a:'Once we receive your payment, our team verifies it and sends your confirmation right away. To help us confirm it faster, kindly send your proof of payment through the official Gladex page marked with the blue verified badge. You can also send your booking reference and proof of payment through ALEX.'},
+  {c:'pay',q:'How can I follow up on my refund?',a:'Open ALEX, choose “I have a payment/refund concern,” then “Refund status.” Give your booking reference and the reference number from your earlier request if you have one. Refund requests are reviewed by our team according to Gladex policy.'},
+  {c:'pay',q:'How long will my refund take?',a:'Approved refunds are processed within 5 to 7 working days, excluding weekends and holidays. The exact timing can also depend on the supplier and your payment method, and we’ll keep you updated every step of the way.'},
+  {c:'pay',q:'Can I request a refund after completing my trip?',a:'Refund requests made after travel are generally not covered under our Terms and Conditions. However, we review each case individually — if there is a valid reason, we will gladly look into it for you. Submit your request through ALEX and our team will review it.'},
+  {c:'pay',q:'Where can I submit proof of payment?',a:'Please submit your proof of payment through the official Gladex page marked with the blue verified badge. For refunds, your Gladex agent or our escalation team will send you the proof of refund once it has been processed. Please don’t post payment details or receipts in public comments or reviews.'},
+
+  {c:'cancel',q:'How can I request cancellation of my booking?',a:'Send your request through ALEX or your Gladex travel consultant with your booking reference, or call the '+HL+'. We’ll guide you through the process, explain any applicable fees, and confirm your cancellation with you directly through a call or message. Your booking is not cancelled until Gladex confirms it with you.'},
+  {c:'cancel',q:'Can I rebook my flight, hotel, or tour package?',a:'Often, yes, but it depends on the airline’s, hotel’s or tour operator’s terms for your booking. Send your request through ALEX with your booking reference and preferred new dates, and our team will check what’s possible.'},
+  {c:'cancel',q:'Are cancellation or rebooking fees applicable?',a:'Yes, cancellation or rebooking fees may apply, as these follow the policies of our partner operators and airlines. Our team will clearly explain the exact charges after reviewing your booking, before you confirm.'},
+  {c:'cancel',q:'What happens if the airline or supplier cancels my booking?',a:'Contact Gladex through ALEX or the hotline with your booking reference. Our team will check the options available under the supplier’s policy, such as rebooking or a refund, and explain them to you.'},
+  {c:'cancel',q:'How can I check the status of my cancellation or rebooking request?',a:'Chat with ALEX or contact your travel consultant, and give your booking reference and the reference number from your request.'},
+
+  {c:'after',q:'Can I still contact Gladex after my trip?',a:'Yes. Your travel may be over, but our care continues. Reach us through ALEX, the '+HL+', or leave a review on this page.'},
+  {c:'after',q:'How can I report a problem with my recent travel experience?',a:'Open ALEX and choose “I have a concern about my recent trip.” ALEX asks a few quick questions and passes your concern to the right Gladex team.'},
+  {c:'after',q:'How can I submit a complaint about the service I received?',a:'Use ALEX or call the hotline. Your complaint is documented and reviewed by the right Gladex team, and our Quality Assurance team monitors how concerns are handled.'},
+  {c:'after',q:'What information should I provide when reporting a concern?',a:'<ul><li>Booking reference, or the full name used in the booking</li><li>Travel date and destination</li><li>What happened, in a few words</li><li>Photos, receipts or screenshots, if you have them</li><li>How we should contact you, and your mobile number</li></ul>'},
+  {c:'after',q:'How can I follow up on an unresolved concern?',a:'Reply on the same channel you used, or call the hotline, and give your concern’s reference number so we can find it quickly.'},
+  {c:'after',q:'How can I track my submitted concern?',a:'Keep the reference number ALEX gives you and use it whenever you follow up through ALEX or the '+HL+'. Our team will update you on the status of your concern.'},
+  {c:'after',q:'What should I do if I have not received an update?',a:'If you feel you haven’t heard from us in a while, please call the '+HL+' and give your reference number, and we’ll check on your concern right away.'},
+  {c:'after',k:'review',q:'How can I provide feedback about my travel experience?',a:'Use “Write a Review” on this page, or tell ALEX. Your feedback helps us improve.'},
+
+  {c:'help',q:'How can I contact Gladex after my travel?',a:'Chat with ALEX on this page, call the '+HL+', or write a review on this page.'},
+  {c:'help',q:'What is ALEX, and how can it help me?',a:'ALEX (Alagang Gladex Experience) is our customer assistant and your first point of contact. ALEX can record your concern, help you plan your next trip, point you to answers here, and connect you to the right Gladex team.'},
+  {c:'help',q:'How can I speak with a real Gladex representative?',a:'In ALEX, choose “I want to talk to a Gladex representative,” or call the '+HL+' and our team will be happy to assist you.'},
+  {c:'help',q:'How can I contact the Gladex hotline?',a:'Call <a href="tel:+639171460222">0917-146-0222</a>. You can also reach us anytime through ALEX on this page, and we’ll connect you to the right Gladex team.'},
+  {c:'help',k:'review',q:'How can I submit a review?',a:'Tap “Write a Review” on this page, give your rating and a few words about your trip, then submit. Reviews are checked by our team before they appear. You can also tap “Review us on Google” and choose the branch that handled your trip.'},
+  {c:'help',q:'Where can I read reviews from other Gladex clients?',a:'In the <a href="#reviews">What Our Clients Say</a> section of this page, including our Google Reviews.'},
+  {c:'help',q:'What should I do if ALEX cannot answer my question?',a:'Ask ALEX to connect you to a Gladex representative, or call the '+HL+'.'}
+];
+
+var STOP={the:1,a:1,an:1,my:1,i:1,to:1,of:1,and:1,or:1,is:1,are:1,can:1,how:1,what:1,do:1,does:1,if:1,for:1,in:1,on:1,with:1,me:1,be:1,it:1,should:1,who:1,where:1,when:1,po:1,ang:1,ng:1,sa:1,ko:1,yung:1};
+function norm(s){return s.toLowerCase().replace(/[’']/g,'').replace(/[^a-z0-9]+/g,' ').trim()}
+function toks(s){return norm(s).split(' ').filter(function(t){return t.length>1&&!STOP[t]})}
+function hit(hay,t){return hay.indexOf(t)>=0||(t.length>4&&/s$/.test(t)&&hay.indexOf(t.slice(0,-1))>=0)}
+
+/* build: one entry per unique question */
+var catById={}, seen={}, faqData=[];
+FAQ_CATS.forEach(function(c){catById[c.id]=c});
+FAQS.forEach(function(f){
+  var key=norm(f.q); if(seen[key]) return; seen[key]=1;
+  var tmp=document.createElement('div'); tmp.innerHTML=f.a;
+  f.id='faq-'+(faqData.length+1); f.qn=norm(f.q); f.hay=norm(f.q+' '+tmp.textContent+' '+catById[f.c].name);
+  faqData.push(f);
+});
+
+var fq=$('#faq-q'), flist=$('#faq-list'), fcount=$('#faq-count'), fempty=$('#faq-empty'), openCats={};
+
+function faqItem(f){
+  var d=document.createElement('details');d.className='faq';d.id=f.id;
+  var s=document.createElement('summary');s.textContent=f.q;d.appendChild(s);
+  var body=document.createElement('div');body.className='faq-a';
+  body.innerHTML='<div>'+f.a+'</div><div class="faq-foot">'+(f.tc?'<span class="tag">Policy to confirm</span>':'')+'<button class="faq-ask" type="button">Ask ALEX about this</button></div>';
+  $('.faq-ask',body).addEventListener('click',function(){askAlex(f)});
+  d.appendChild(body);
+  return d;
+}
+function renderFaqs(){
+  var ts=toks(fq.value), raw=norm(fq.value), shown=0, loose=false;
+  flist.innerHTML='';
+  function ok(f,any){
+    if(!raw) return true;
+    if(!ts.length) return f.hay.indexOf(raw)>=0;
+    return any?ts.some(function(t){return hit(f.hay,t)}):ts.every(function(t){return hit(f.hay,t)});
+  }
+  /* no question has every word: fall back to questions with any of the words */
+  if(ts.length>1&&!faqData.some(function(f){return ok(f,false)})) loose=true;
+  FAQ_CATS.forEach(function(c){
+    var items=faqData.filter(function(f){return f.c===c.id&&ok(f,loose)});
+    if(!items.length) return;
+    /* each category is a dropdown: closed by default, opened while searching */
+    var g=document.createElement('details');g.className='faq-cat';g.id='cat-'+c.id;g.open=!!raw||!!openCats[c.id];
+    g.addEventListener('toggle',function(){if(!raw)openCats[c.id]=g.open});
+    var sm=document.createElement('summary'), h=document.createElement('h3'), n=document.createElement('span');
+    h.textContent=c.em+' '+c.name; n.className='n'; n.textContent=items.length+(items.length===1?' question':' questions');
+    sm.appendChild(h);sm.appendChild(n);g.appendChild(sm);
+    var l=document.createElement('div');l.className='faq-list';
+    items.forEach(function(f){l.appendChild(faqItem(f))});
+    g.appendChild(l);flist.appendChild(g);shown+=items.length;
+  });
+  fempty.hidden=shown>0;
+  fcount.textContent=!raw?(shown+' questions in '+FAQ_CATS.length+' categories. Tap a category to see its questions.')
+    :loose&&shown?('No exact match for “'+fq.value.trim()+'”. Showing '+shown+' related questions.')
+    :(shown+' of '+faqData.length+' questions match “'+fq.value.trim()+'”');
+}
+var ft=null;
+fq.addEventListener('input',function(){clearTimeout(ft);ft=setTimeout(renderFaqs,120)});
+fq.addEventListener('search',renderFaqs);
+$('#faq-clear').addEventListener('click',function(){fq.value='';renderFaqs();fq.focus()});
+$('#faq-empty-alex').addEventListener('click',function(){var v=fq.value.trim();openChat(null,function(){if(v){add('me',v);suggestFaqs(v)}else menu(true)})});
+$('#faq-cta-alex').addEventListener('click',function(){openChat(null)});
+renderFaqs();
+var nTc=faqData.filter(function(f){return f.tc}).length;
+$('#faq-note').textContent=nTc?('Prototype: '+(faqData.length-nTc)+' answers are ready for review; '+nTc+' are tagged "Policy to confirm" and need official Gladex policy before going live.'):('All '+faqData.length+' frequently asked questions, answered. Can’t find yours? Chat with ALEX or call the Gladex Hotline (0917-146-0222).');
+
+/* open one FAQ on the page (used by ALEX) */
+function openFaq(f){
+  closeChat(); fq.value=''; openCats[f.c]=true; renderFaqs();
+  var d=document.getElementById(f.id); d.open=true;
+  setTimeout(function(){d.scrollIntoView({behavior:reduce?'auto':'smooth',block:'center'});$('summary',d).focus({preventScroll:true})},reduce?0:280);
+}
+/* ALEX: rank FAQs for a typed question */
+function matchFaqs(v){
+  var ts=toks(v); if(!ts.length) return [];
+  return faqData.map(function(f){
+    var sc=0; ts.forEach(function(t){if(hit(f.qn,t))sc+=2;else if(hit(f.hay,t))sc+=1});
+    return {f:f,sc:sc};
+  }).filter(function(x){return x.sc>=2}).sort(function(a,b){return b.sc-a.sc}).slice(0,3).map(function(x){return x.f});
+}
+function suggestFaqs(v){
+  token++; pending=null;
+  var m=matchFaqs(v);
+  if(!m.length){notSure();return}
+  then(say('These FAQs may answer your question. Tap one to open it on the page.'),function(){
+    var arr=m.map(function(f){return {label:'❓ '+f.q,fn:function(){openFaq(f)}}});
+    arr.push({label:'None of these, talk to a representative',fn:rep});
+    arr.push({label:'Back to main menu',fn:function(){menu(false)}});
+    chips(arr);
+  });
+}
+function faqHelp(){
+  then(say('Sure! Type your question in a few words, for example “refund status” or “lost voucher”, and I’ll find the matching FAQ.'),function(){
+    ask('Your question','e.g., refund status',function(v){return toks(v).length>0||'Please type a few words about your question.'},suggestFaqs);
+  });
+}
+/* "Ask ALEX about this" on a FAQ */
+function askAlex(f){
+  var k=f.k||catById[f.c].k;
+  openChat(null,function(){
+    add('me','About this FAQ: '+f.q);
+    then(say("Thanks for checking our FAQs! If that answer didn't fully help, I can take your details so the right Gladex team can look into it."),function(){
+      var arr=[];
+      if(C[k]) arr.push({label:'Yes, report my concern',strong:true,fn:function(){concern(k)}});
+      if(k==='review') arr.push({label:'Write a review',strong:true,fn:review});
+      arr.push({label:'Talk to a Gladex representative',fn:rep});
+      arr.push({label:'Call the Gladex Hotline',fn:hotline});
+      arr.push({label:'Back to main menu',fn:function(){menu(false)}});
+      chips(arr);
+    });
+  });
+}
+})();
+</script>
