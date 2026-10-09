@@ -451,7 +451,7 @@ body.chat-open .fab{display:none}
   <section id="reviews" aria-labelledby="rv-h">
     <div class="wrap">
       <div class="sec-head">
-        <div><h2 id="rv-h">⭐ What Our Clients Say</h2><p>Stories from travelers after their Gladex trip, here and on Google. The cards below are placeholders for this prototype.</p></div>
+        <div><h2 id="rv-h">⭐ What Our Clients Say</h2><p>Read verified reviews from our clients on Google — and share your own experience.</p></div>
         <button class="btn btn-primary" type="button" id="rv-toggle" aria-expanded="false" aria-controls="rf-wrap">WRITE A REVIEW</button>
       </div>
       <div class="rev-grid" id="rev-list"></div>
@@ -459,7 +459,7 @@ body.chat-open .fab{display:none}
       <div class="g-wrap" id="g-reviews" aria-labelledby="g-h">
         <div class="g-head">
           <div><h3 id="g-h"><span class="g-logo" aria-hidden="true"><span class="b">G</span><span class="r">o</span><span class="y">o</span><span class="b">g</span><span class="g">l</span><span class="r">e</span></span><span class="sr">Google</span> Reviews</h3>
-          <p>Ratings from our Gladex branches on Google. Loved your trip? Leave us a review on Google too.</p></div>
+          <p>See what our clients say on Google. Loved your trip? Leave us a review on Google too.</p></div>
         </div>
         <div class="g-branches" id="g-branches"></div>
         <div class="rev-grid" id="g-list"></div>
@@ -594,13 +594,7 @@ document.addEventListener('click',function(e){
 
 /* reviews */
 var MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
-var SAMPLES=[
-  {name:'Maria S.',trip:'Bohol family trip',month:'May 2026',rating:5,text:'Smooth trip from start to finish. When we had a question after coming home, Gladex still answered us right away. Salamat po!'},
-  {name:'Joel R.',trip:'Japan tour',month:'April 2026',rating:5,text:'Our flight schedule changed while we were abroad. The team helped us understand our options and kept us updated.'},
-  {name:'Liza T.',trip:'Boracay barkada trip',month:'March 2026',rating:4,text:'Good hotel and easy transfers. Had a small concern about our room and it was noted and followed up after the trip.'},
-  {name:'Paolo D.',trip:'Singapore getaway',month:'February 2026',rating:5,text:'I liked that I knew exactly who to message after the trip. Hindi na ako nag-alala kung saan magfo-follow up.'},
-  {name:'Grace M.',trip:'Palawan honeymoon',month:'January 2026',rating:4,text:'Friendly and patient staff. They explained everything clearly before and after our travel.'}
-];
+var SAMPLES=[];
 var list=$('#rev-list');
 function starsHtml(n){var s='';for(var i=1;i<=5;i++)s+=i<=n?'★':'<span class="off">★</span>';return s}
 function revCard(r,pending){
@@ -621,9 +615,8 @@ var yr=new Date().getFullYear(); for(var y=yr;y>=yr-3;y--){var o=document.create
 
 var rfWrap=$('#rf-wrap'), rf=$('#rf'), tog=$('#rv-toggle'), msg=$('#rv-msg');
 function openReview(){
-  rfWrap.hidden=false; tog.setAttribute('aria-expanded','true');
-  rfWrap.scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'});
-  setTimeout(function(){$('#rv-star-1').focus({preventScroll:true})},reduce?0:350);
+  var b=GOOGLE.branches[0];
+  window.open((b&&b.reviewUrl)||'https://www.google.com/maps?cid=14255882654333237940','_blank','noopener');
 }
 function closeReview(){rfWrap.hidden=true;tog.setAttribute('aria-expanded','false');tog.focus()}
 tog.addEventListener('click',function(){rfWrap.hidden?openReview():closeReview()});
@@ -661,17 +654,9 @@ var GOOGLE={
   /* reviewUrl = "Ask for reviews" link ng branch sa Google Business Profile (hal. https://g.page/r/XXXX/review)
      mapsUrl   = Google Maps link ng branch. Iwanang '' hangga't wala pa. */
   branches:[
-    {name:'Gladex Main',rating:null,count:null,reviewUrl:'',mapsUrl:''},
-    {name:'Gladex Corporate',rating:null,count:null,reviewUrl:'',mapsUrl:''},
-    {name:'Gladex Robinsons',rating:null,count:null,reviewUrl:'',mapsUrl:''},
-    {name:'Gladex SM',rating:null,count:null,reviewUrl:'',mapsUrl:''}
+    {name:'Gladex Travel and Tours Corp.',rating:null,count:null,reviewUrl:'https://www.google.com/maps?cid=14255882654333237940',mapsUrl:'https://www.google.com/maps?cid=14255882654333237940'}
   ],
-  /* Google reviews na ipapakita sa page (pinili ng QA; walang personal na detalye) */
-  reviews:[
-    {name:'Sample G.',branch:'Gladex Main',when:'2 weeks ago',rating:5,text:'Sample Google review placeholder. Replace with a real review from the Gladex Google Business Profile.'},
-    {name:'Sample R.',branch:'Gladex SM',when:'1 month ago',rating:5,text:'Sample Google review placeholder. Real reviews will show here once the Google links are connected.'},
-    {name:'Sample L.',branch:'Gladex Robinsons',when:'1 month ago',rating:4,text:'Sample Google review placeholder for layout only.'}
-  ]
+  reviews:[]
 };
 var gReady=GOOGLE.branches.some(function(b){return b.reviewUrl});
 function gOpen(b,kind){
@@ -683,7 +668,7 @@ var gBr=$('#g-branches');
 GOOGLE.branches.forEach(function(b){
   var d=document.createElement('div'); d.className='g-br';
   var has=b.rating!=null;
-  d.innerHTML='<b></b><div class="g-score">'+(has?'<span class="num">'+b.rating.toFixed(1)+'</span><span class="stars-row" role="img" aria-label="'+b.rating.toFixed(1)+' out of 5 stars">'+starsHtml(Math.round(b.rating))+'</span><span class="cnt">'+(b.count||0)+' Google reviews</span>':'<span class="cnt">Rating appears once connected</span>')+'</div>'+
+  d.innerHTML='<b></b><div class="g-score">'+(has?'<span class="num">'+b.rating.toFixed(1)+'</span><span class="stars-row" role="img" aria-label="'+b.rating.toFixed(1)+' out of 5 stars">'+starsHtml(Math.round(b.rating))+'</span><span class="cnt">'+(b.count||0)+' Google reviews</span>':'<span class="cnt">Read and write reviews on Google</span>')+'</div>'+
     (b.reviewUrl?'':'<span class="todo">Google link needed</span>')+
     '<div class="acts"><button class="btn btn-primary" type="button" data-k="write">Review us on Google</button><button class="btn btn-ghost" type="button" data-k="read">See on Google</button></div>';
   $('b',d).textContent=b.name;
@@ -696,7 +681,7 @@ GOOGLE.reviews.forEach(function(r){
   $('.lbl',a).textContent=gReady?'Posted on Google':'Sample Google review — placeholder';
   gList.appendChild(a);
 });
-$('#g-note').textContent=gReady?'Reviews shown are from Google. Tap "See on Google" to read all.':'Prototype: Google links and ratings are placeholders until Gladex adds the official Google Business Profile link of each branch.';
+$('#g-note').textContent='Our client reviews are on Google. Tap "See on Google" to read them, or "Review us on Google" to share your own.';
 /* pagkatapos mag-submit: alok sa LAHAT ng rating (bawal sa Google ang pili-piliin lang ang masaya) */
 function gAsk(){
   var old=$('#g-ask'); if(old) old.remove();
@@ -1022,7 +1007,7 @@ var FAQS=[
   {c:'help',q:'What is ALEX, and how can it help me?',a:'ALEX (Alagang Gladex Experience) is our customer assistant and your first point of contact. ALEX can record your concern, help you plan your next trip, point you to answers here, and connect you to the right Gladex team.'},
   {c:'help',q:'How can I speak with a real Gladex representative?',a:'In ALEX, choose “I want to talk to a Gladex representative,” or call the '+HL+' and our team will be happy to assist you.'},
   {c:'help',q:'How can I contact the Gladex hotline?',a:'Call <a href="tel:+639171460222">0917-146-0222</a>. You can also reach us anytime through ALEX on this page, and we’ll connect you to the right Gladex team.'},
-  {c:'help',k:'review',q:'How can I submit a review?',a:'Tap “Write a Review” on this page, give your rating and a few words about your trip, then submit. Reviews are checked by our team before they appear. You can also tap “Review us on Google” and choose the branch that handled your trip.'},
+  {c:'help',k:'review',q:'How can I submit a review?',a:'Tap “Review us on Google” in the reviews section (or ask ALEX), then share your rating and a few words about your Gladex trip on our Google page. Your honest feedback helps other travelers and helps us improve.'},
   {c:'help',q:'Where can I read reviews from other Gladex clients?',a:'In the <a href="#reviews">What Our Clients Say</a> section of this page, including our Google Reviews.'},
   {c:'help',q:'What should I do if ALEX cannot answer my question?',a:'Ask ALEX to connect you to a Gladex representative, or call the '+HL+'.'}
 ];
