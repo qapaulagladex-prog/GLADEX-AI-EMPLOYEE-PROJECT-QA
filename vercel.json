@@ -1,0 +1,7 @@
+{
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/", "destination": "/alagang-gladex/index.html" },
+    { "source": "/assets/:path*", "destination": "/alagang-gladex/assets/:path*" }
+  ]
+}
